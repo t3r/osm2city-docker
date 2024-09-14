@@ -1,0 +1,25 @@
+From 67e956704aa90eaefe23c84bc1cf48877e0e18fb Mon Sep 17 00:00:00 2001
+From: Torsten Dreyer <torsten@t3r.de>
+Date: Tue, 23 Jan 2024 22:40:36 +0100
+Subject: [PATCH 2/2] make PATH_TO_OUTPUT settable from environment variable
+
+---
+ osm2city/parameters.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/osm2city/parameters.py b/osm2city/parameters.py
+index 24de0da..5c83c38 100755
+--- a/osm2city/parameters.py
++++ b/osm2city/parameters.py
+@@ -62,7 +62,7 @@ PATH_TO_SCENERY_OPT = None  # if not none, then needs to be list of strings
+ #    if you use TerraSync for PATH_TO_SCENERY, you MUST choose a different
+ #    path here. Otherwise, TerraSync will overwrite the generated scenery.
+ #    Also make sure PATH_TO_OUTPUT is included in your $FG_SCENERY.
+-PATH_TO_OUTPUT = "/home/user/fgfs/scenery/osm2city"
++PATH_TO_OUTPUT = os.environ.get("OSM2CITY_PATH_TO_OUTPUT","/home/user/fgfs/scenery/osm2city")
+ 
+ PATH_TO_OSM2CITY_DATA = "/home/user/osm2city-data"
+ DB_HOST = os.environ.get("PGHOST","localhost")  # The host name of the computer running PostGIS.
+-- 
+2.39.1
+

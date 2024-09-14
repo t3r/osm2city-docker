@@ -1,0 +1,27 @@
+services:
+  builder:
+#    platform: linux/amd64
+    platform: linux/arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    image: osm2city-builder
+    environment:
+      FG_SCENERY: /workspace/scenery
+      FG_ROOT: /app/fg_root
+      OSM2CITY_PATH_TO_OUTPUT: /workspace/o2c-scenery
+      OSM2CITY_PATH_TO_PACKED: /workspace/o2c-packed
+      OVERPASS_URI: "https://overpass.kumi.systems/api/interpreter"
+#      O2C_PROCESSES: 4
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+    volumes:
+#      - ./params.ini:/app/params.ini
+      - ${FG_ROOT:?error}:/app/fg_root:ro
+      - ../workspace:/workspace
+    entrypoint:
+      - /app/scripts/build.sh
+# 2150376 killed

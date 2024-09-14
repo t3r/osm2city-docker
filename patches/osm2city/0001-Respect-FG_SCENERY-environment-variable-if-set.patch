@@ -1,0 +1,25 @@
+From d5e1732025ef92cd5249cd284d7fe73aab93c367 Mon Sep 17 00:00:00 2001
+From: Torsten Dreyer <torsten@t3r.de>
+Date: Sat, 20 Jan 2024 23:04:13 +0100
+Subject: [PATCH] Respect FG_SCENERY environment variable if set
+
+---
+ osm2city/parameters.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/osm2city/parameters.py b/osm2city/parameters.py
+index 9650f70..24de0da 100755
+--- a/osm2city/parameters.py
++++ b/osm2city/parameters.py
+@@ -51,7 +51,7 @@ AREA = ''  # Not used in the code - use it in your parameters.py for conditional
+ # -- Full path to the scenery folder without trailing slash. This is where we
+ #    will probe elevation and check for overlap with static objects. Most
+ #    likely you'll want to use your TerraSync path here.
+-PATH_TO_SCENERY = "/home/user/fgfs/scenery/TerraSync"
++PATH_TO_SCENERY = os.environ.get("FG_SCENERY","/home/user/fgfs/scenery/TerraSync")
+ 
+ # Optional additional list of paths to scenery folders (e.g. project3000).
+ # Only used for overlap checking for buildings against static and shared objects
+-- 
+2.39.1
+
