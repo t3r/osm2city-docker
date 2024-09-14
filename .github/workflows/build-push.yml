@@ -14,7 +14,7 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
 
 jobs:
-  deploy:
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,7 +41,6 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
-        working-directory: ./docker
         run: |
           docker build -t ${ECR_REGISTRY}/cloudcity:${IMAGE_TAG}-arm64 --platform linux/arm64 .
           docker push ${ECR_REGISTRY}/cloudcity:${IMAGE_TAG}-arm64
