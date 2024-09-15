@@ -43,7 +43,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and push arm64
-        id: build-image
+        id: build-image-arm64
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
@@ -53,7 +53,7 @@ jobs:
           docker push ${ECR_REGISTRY}/cloudcity:${IMAGE_TAG}-arm64
 
       - name: Build and push amd64
-        id: build-image
+        id: build-image-amd64
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
